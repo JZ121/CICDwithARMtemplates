@@ -47,7 +47,7 @@
               "image": "[parameters('image')]",
               "ports": [
                 {
-                  "port": 80
+                  "port": 8080
                 }
               ],
               "environmentVariables": [
@@ -76,7 +76,7 @@
           "ports": [
             {
               "protocol": "TCP",
-              "port": 80
+              "port": 8080
             }
           ],
           "type": "Public",
