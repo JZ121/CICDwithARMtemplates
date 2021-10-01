@@ -34,6 +34,12 @@ steps:
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
 
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(System.DefaultWorkingDirectory)'
+    Contents: 'dockerProj-1/DockerFile'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
 
 - task: PublishBuildArtifacts@1
   inputs:
@@ -41,23 +47,3 @@ steps:
     ArtifactName: 'drop'
     publishLocation: 'Container'
 
-- task: DockerInstaller@0
-  inputs:
-    dockerVersion: '17.09.0-ce'
-
-- task: Docker@2
-  inputs:
-    command: 'build'
-    Dockerfile: '**/Dockerfile'
-
-- task: AzureResourceManagerTemplateDeployment@3
-  inputs:
-    deploymentScope: 'Resource Group'
-    azureResourceManagerConnection: 'Azure Pass - Sponsorship (d9328439-9ca6-4ee4-9e8d-86d4951f9a13)'
-    subscriptionId: 'd9328439-9ca6-4ee4-9e8d-86d4951f9a13'
-    action: 'Create Or Update Resource Group'
-    resourceGroupName: 'ACIDeployRG'
-    location: 'East US'
-    templateLocation: 'Linked artifact'
-    csmFile: 'deployacr.json'
-    deploymentMode: 'Incremental'
